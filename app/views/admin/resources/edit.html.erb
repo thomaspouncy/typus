@@ -1,31 +1,38 @@
 <%
-  page_title = Typus::I18n.t("Edit %{resource}", :resource => @resource.model_name.human)
-  title(page_title)
+page_title = Typus::I18n.t("Edit %{resource}", :resource => @resource.model_name.human)
+title(page_title)
 %>
 
 <% content_for :main_grid do %>
-  <h2>
-    <%= page_title %>
-    <small><%= list_actions %></small>
-  </h2>
+
+<%= display_flash_message %>
+<%= render 'edit' %>
+
+<div class="boxed">
+  <div class="page-heading padded clearfix">
+    <h2>
+      <%= page_title %>
+      <small><%= list_actions %></small>
+    </h2>
+  </div>
 
   <% if flash[:notice] && headless_mode? %>
-    <script>
-      $(document).ready(function() { parent.location.reload(); });
-    </script>
+  <script>
+  $(document).ready(function() { parent.location.reload(); });
+  </script>
   <% end %>
 
-  <%= display_flash_message %>
-  <%= render 'edit' %>
-
   <%
-    options = params.dup.cleanup.merge!(:action => 'update')
-    button = Typus::I18n.t("Save %{resource}", :resource => @resource.model_name.human)
+  options = params.dup.cleanup.merge!(:action => 'update')
+  button = Typus::I18n.t("Save %{resource}", :resource => @resource.model_name.human)
   %>
 
   <%= render :partial => 'form', :locals => { :options => options, :button => button } %>
+</div>
 
+  <div class="boxed">
   <%= typus_relationships unless headless_mode? %>
+  </div>
 <% end %>
 
 <div class="grid_2">

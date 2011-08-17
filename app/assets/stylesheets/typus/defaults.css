@@ -4,6 +4,7 @@ body {
   font-family: "Lucida Grande", Sans-serif;
   font-size: 75%;
   height: 100%;
+  background: #e0e0e1 url("/assets/typus/body-background.jpg") repeat center center;
 }
 
 label { display: block; font-weight: bold; margin: 0 0 5px 0; }

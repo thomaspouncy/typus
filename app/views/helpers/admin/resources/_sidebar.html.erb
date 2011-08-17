@@ -20,8 +20,10 @@
       <% klass = resource.constantize %>
 
       <ul>
+        
+        <% css_class = "active" if @resource.model_name.eql?(resource) %>
 
-        <%= link_to :controller => "/admin/#{klass.to_resource}" do %>
+        <%= link_to({:controller => "/admin/#{klass.to_resource}"}, {:class => css_class}) do %>
           <li class="header"><%= klass.model_name.human.pluralize %></li>
         <% end %>
 

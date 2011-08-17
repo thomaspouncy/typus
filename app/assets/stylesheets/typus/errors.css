@@ -1,8 +1,7 @@
-#errorExplanation,
 .alert,
 .notice {
   padding: 0.8em;
-  margin: 1em 0;
+  margin: 0 0 1em 0;
   border: 1px solid #ddd;
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
@@ -15,19 +14,20 @@
   color: #D12F19;
 }
 
-#errorExplanation h3 { margin: 5px 0 0 0; }
+#errorExplanation h3 { margin: 5px 0 0 0; font-size:1.15em }
 
 #errorExplanation ul { margin: 10px 0 0 20px!important; }
 
 #errorExplanation,
-.alert { background: #FBE3E4; border-color: #FBC2C4; color: #D12F19; }
-.alert a { color: #D12F19; text-decoration: underline; }
+.alert { background: #fae2e3; border-color: #d7b0b2; color: #b31515; }
+.alert a { color: #b31515; text-decoration: underline; }
 
-.notice { background: #FFF6BF; border-color: #FFD324; color: #817134; }
-.notice a { color: #817134; text-decoration: underline; }
+.notice { background: #fff6bf; border-color: #e5c02d; color: #6d5f2c; }
+.notice a { color: #6d5f2c; text-decoration: underline; }
 
 .fieldWithErrors label { color: #CD0A0A;}
 .fieldWithErrors input { background: #FEF8F6; }
 
+#errorExplanation {border-bottom:1px solid #efc8c9;}
 #errorExplanation ul { margin: 1em 1.5em; }
-#errorExplanation ul li { list-style: square!important; margin: 0!important; }
+#errorExplanation ul li { list-style: square!important; margin: 0!important; color: #555; }

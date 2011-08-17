@@ -2,8 +2,11 @@
 
 <% if (resources = Typus.resources.delete_if { |r| !(admin_user.is_a?(FakeUser) || admin_user.resources.include?(r)) }).any? %>
 
+<div class="page-heading padded clearfix">
   <h2><%= Typus::I18n.t("Resources") %></h2>
+</div>
 
+<div class="padded">
   <table>
 
     <thead>
@@ -13,11 +16,12 @@
     </thead>
 
     <% resources.each do |resource| %>
-      <tr class="<%= cycle("even", "odd") %>">
-        <td><%= link_to Typus::I18n.t(resource.titleize.capitalize), :controller => "/admin/#{resource.underscore}" %></td>
-      </tr>
+    <tr class="<%= cycle("even", "odd") %>">
+      <td><%= link_to Typus::I18n.t(resource.titleize.capitalize), :controller => "/admin/#{resource.underscore}" %></td>
+    </tr>
     <% end %>
 
   </table>
+</div>
 
 <% end %>

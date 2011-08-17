@@ -1,7 +1,10 @@
 <!-- Applications list with models. -->
 
-<h2><%= Typus::I18n.t("Applications") %></h2>
+<div class="page-heading padded clearfix">
+  <h2><%= Typus::I18n.t("Applications") %></h2>
+</div>
 
+<div class="padded">
 <% if admin_user.applications.any? %>
   <% admin_user.applications.each do |app| %>
 
@@ -29,3 +32,4 @@
     No applications detected.
   </div>
 <% end %>
+</div>
