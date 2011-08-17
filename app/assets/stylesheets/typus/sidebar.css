@@ -28,7 +28,7 @@
   padding-left: 1em;
   padding-bottom:0.5em;
   margin-bottom:0.5em;
-  background: url(/assets/sidebar-li-separator.gif) repeat-x center bottom;
+  background: url("/assets/typus/sidebar-app-separator.gif") repeat-x center bottom;
 }
 
 #sidebar ul li a {
