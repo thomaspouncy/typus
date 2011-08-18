@@ -30,9 +30,8 @@ title(page_title)
   <%= render :partial => 'form', :locals => { :options => options, :button => button } %>
 </div>
 
-  <div class="boxed">
-  <%= typus_relationships unless headless_mode? %>
-  </div>
+<%= typus_relationships unless headless_mode? %>
+
 <% end %>
 
 <div class="grid_2">
