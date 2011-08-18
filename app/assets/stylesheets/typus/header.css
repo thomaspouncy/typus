@@ -51,7 +51,7 @@
 
 #header .applications ul li a.active,
 #header .applications ul li a:hover {
-  background: #e0e0e1 url("/assets/bg.jpg") repeat center center;
+  background: #e0e0e1 url("/assets/typus/body-background.jpg") repeat center center;
   color: #000;
   text-decoration: none !important;
   text-shadow: #f1f2f2 1px 1px;
