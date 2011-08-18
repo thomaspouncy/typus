@@ -6,11 +6,11 @@
   background-image:     -ms-linear-gradient(top, #565a5f, #494f56);
   background-image:      -o-linear-gradient(top, #565a5f, #494f56);
   
-  padding: 2em 1em 0.85em 1.25em;
+  padding: 2.5em 1em 0em 1.25em;
 }
 
 #header .title {
-  margin-bottom: 2.75em;
+  margin-bottom: 2em;
 }
 
 #header .title h1 a {
@@ -24,23 +24,37 @@
 #header .title,
 #header .title h1 a,
 #header .applications,
-#header .applications a,
-#header .profile,
-#header .profile a {
+#header .applications a {
   color: #FFF;
 }
 
+#header .profile, #header .profile a {
+  color: #bebebe;
+  font-size:0.95em;
+}
+
+#header .profile a {
+  margin-left:0.5em;
+  margin-right:0.5em;
+}
+
+#header .profile a:hover, #header .profile a:active {
+  color:#ddd;
+}
+
 #header ul li {
-  display: inline;
+  display:block;
+  float:left;
 }
 
 #header .applications ul li {
-  padding-right: 0.15em;
+  margin:0.25em 0.25em 0 0;
 }
 
 #header .applications ul li a {
+  display:block;
   background: #32353a;
-  padding: 8px 10px;
+  padding: 10px;
   text-decoration: none;
 }
 
