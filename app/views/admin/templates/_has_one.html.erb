@@ -1,14 +1,20 @@
-<div class="box_relationships" id="<%= association_name %>">
+<div class="boxed">
+  <div class="box_relationships" id="<%= association_name %>">
 
-  <h2>
-    <%= association_name.titleize.humanize %>
-    <small><%= add_new %></small>
-  </h2>
+    <div class="page-heading padded clearfix">
+      <h2>
+        <%= association_name.titleize.humanize.pluralize %>
+        <small><%= add_new %></small>
+      </h2>
+    </div>
 
-  <% if @items.any? -%>
-    <%= table %>
-  <% else %>
-    <p><%= Typus::I18n.t("No %{resources} found.", :resources => association_name.humanize.downcase) %></p>
-  <% end %>
+    <div class="padded">
+      <% if @items.any? -%>
+      <%= table %>
+      <% else %>
+      <p><%= Typus::I18n.t("No %{resources} found.", :resources => association_name.humanize.downcase) %></p>
+      <% end %>
+    </div>
 
+  </div>
 </div>

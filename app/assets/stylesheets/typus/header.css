@@ -1,10 +1,16 @@
 #header {
-  background: #4A525A;
-  padding: 1.25em 0 1.25em 1em;
+  background-color: #52565c;
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#565a5f), to(#494f56));
+  background-image: -webkit-linear-gradient(top, #565a5f, #494f56);
+  background-image:    -moz-linear-gradient(top, #565a5f, #494f56);
+  background-image:     -ms-linear-gradient(top, #565a5f, #494f56);
+  background-image:      -o-linear-gradient(top, #565a5f, #494f56);
+  
+  padding: 2.5em 1em 0em 1.25em;
 }
 
 #header .title {
-  margin-bottom: 1.5em;
+  margin-bottom: 2em;
 }
 
 #header .title h1 a {
@@ -18,37 +24,51 @@
 #header .title,
 #header .title h1 a,
 #header .applications,
-#header .applications a,
-#header .profile,
-#header .profile a {
+#header .applications a {
   color: #FFF;
 }
 
-#header ul li {
-  display: inline;
+#header .profile, #header .profile a {
+  color: #bebebe;
+  font-size:0.95em;
 }
 
-#header .applications {
-  margin: -0.5em 1em;
+#header .profile a {
+  margin-left:0.5em;
+  margin-right:0.5em;
+}
+
+#header .profile a:hover, #header .profile a:active {
+  color:#ddd;
+}
+
+#header ul li {
+  display:block;
+  float:left;
 }
 
 #header .applications ul li {
-  line-height: 2.5em;
-  padding: 0 0.25em 0 0;
+  margin:0.25em 0.25em 0 0;
 }
 
 #header .applications ul li a {
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
-  background: #242527;
-  padding: 3px 5px;
+  display:block;
+  background: #32353a;
+  padding: 10px;
   text-decoration: none;
+}
+
+#header .applications ul li.dashboard a {
+  background-color:#3f4449;
+  color: #eaeaea;
 }
 
 #header .applications ul li a.active,
 #header .applications ul li a:hover {
-  background: #FFF;
+  background: #e0e0e1 url("/assets/typus/body-background.jpg") repeat center center;
   color: #000;
+  text-decoration: none !important;
+  text-shadow: #f1f2f2 1px 1px;
 }
 
 #header .profile {

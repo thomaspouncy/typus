@@ -1,31 +1,50 @@
+#sidebar h2 {
+  font-size: 1.15em;
+}
+
 #sidebar ul li.header {
+  list-style:none;
+}
+
+#sidebar ul a.active li.header {
+  background-color: #d3d3d3;
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
-  background: #242527;
-  color: #FFF;
-  font-size: 1.20em;
-  font-weight: bold;
-  padding: 0.25em 0.5em;
-  margin: 0.5em 0;
+  border-radius: 4px;
 }
 
 #sidebar ul {
   margin: 0;
 }
 
+#sidebar ul li {
+  padding:0.25em 0.50em;
+  margin-bottom:0.5em;
+  color:#32353a;
+}
+
 #sidebar ul ul li {
   list-style: none;
-  padding-left: 0.5em;
+  padding-left: 1em;
+  padding-bottom:0.5em;
+  margin-bottom:0.5em;
+  background: url("/assets/typus/sidebar-app-separator.gif") repeat-x center bottom;
 }
 
 #sidebar ul li a {
-  color: white;
+  color:#32353a;
+  text-shadow:#e4e4e4 1px 1px 1px;  
+  font-weight:normal;
 }
 
 #sidebar ul ul li a {
-  color: black;
+  color:#32353a;
+  text-shadow:#e4e4e4 1px 1px 1px;
 }
 
 #sidebar a {
   text-decoration: none;
+  color:#32353a;
+  text-shadow:#e4e4e4 1px 1px 1px;
+  font-weight:bold;
 }

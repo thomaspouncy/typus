@@ -9,9 +9,11 @@ table a {
 }
 
 table th {
-  background: #242527;
+  background: #51565c;
   color: #FFF;
+  text-shadow: #000 1px 1px;
   padding: 6px;
+  text-align:left;
 }
 
 table th a {
@@ -42,6 +44,6 @@ table tr.odd {
 
 table td {
   border: none;
-  padding: 5px;
+  padding: 8px 5px;
   vertical-align: top;
 }

@@ -51,10 +51,10 @@
 }
 
 #content .filters {
-  border-bottom: 1px solid #D3D3D3;
+  border-bottom: 3px solid #e8e8e8;
   height: 2em;
-  margin-bottom: 1em;
-  padding: 1em 0;
+  padding:0px 0px 15px 0px;
+  margin:15px 15px 1em 15px;
 }
 
 #content .filters ul {
@@ -76,18 +76,53 @@
 }
 
 #content ul.predefined_filters {
-  border-bottom: 1px solid #D3D3D3;
-  margin: -0.5em 0 0 0;
-  padding: 1em 0;
+  line-height:30px;
+  margin:0px;
 }
 
 #content ul.predefined_filters li {
   display: inline;
-  margin: 0 0.5em 0 0;
+  margin: 0 0 0 0.5em;
 }
 
 #content .actions {
   font-size: 0.9em;
   margin: 0.5em 0;
   height: 1em;
+}
+
+#content .boxed {
+  background-color:#fff;
+  -moz-box-shadow:0 0 10px #c8c8c8;
+  -webkit-box-shadow:0 0 10px #c8c8c8;
+  box-shadow:0 0 10px #c8c8c8;
+  
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+
+#content .boxed .page-heading {
+  background-color:#f5f5f5;
+  border-bottom:1px solid #e5e5e5;
+  
+  -moz-border-radius-topleft: 4px;
+  -moz-border-radius-topright: 4px;
+  -webkit-border-top-left-radius: 4px;
+  -webkit-border-top-right-radius: 4px;
+  border-top-left-radius:4px;
+  border-top-right-radius:4px;
+}
+
+#content .boxed .page-heading h2 {
+  float:left;
+  font-size: 1.15em;
+}
+
+#content .boxed .page-heading aside {
+  float:right;
+}
+
+#content .padded {
+  padding:15px;
 }

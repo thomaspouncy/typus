@@ -4,13 +4,13 @@
 
   <%= render "helpers/admin/resources/errors" %>
 
-  <fieldset class="inputs">
+  <fieldset class="inputs padded">
     <ol>
       <%= build_form(fields, form) %>
     </ol>
   </fieldset>
 
-  <fieldset class="buttons">
+  <fieldset class="buttons padded">
     <ol>
       <% build_save_options.each do |key, value| %>
         <li><%= submit_tag Typus::I18n.t(value), :name => key, :onclick => "setConfirmUnload(false);", :disable_with => Typus::I18n.t(value) %></li>

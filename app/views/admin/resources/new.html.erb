@@ -4,16 +4,21 @@
 %>
 
 <% content_for :main_grid do %>
-  <h2>
+
+<%= display_flash_message %>
+<%= render 'new' %>
+
+<div class="boxed">
+  <div class="page-heading padded clearfix">
+    <h2>
     <%= page_title %>
     <small><%= list_actions %></small>
   </h2>
+</div> 
 
-  <%= display_flash_message %>
-  <%= render 'new' %>
-
-  <%= render :partial => 'form',
-             :locals => { :options => params.dup.cleanup.merge(:action => 'create') } %>
+<%= render :partial => 'form',
+           :locals => { :options => params.dup.cleanup.merge(:action => 'create') } %>
+</div>
 <% end %>
 
 <div class="grid_2">

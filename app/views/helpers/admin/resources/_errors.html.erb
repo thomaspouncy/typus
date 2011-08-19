@@ -1,5 +1,5 @@
 <% if @item.errors.any? %>
-  <div id="errorExplanation">
+  <div id="errorExplanation" class="padded">
     <h3><%= Typus::I18n.t("%{errors} prohibited this page from being saved:", :errors => pluralize(@item.errors.count, "error")) %></h3>
     <ul>
     <% @item.errors.full_messages.each do |full_message| %>

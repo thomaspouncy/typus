@@ -4,22 +4,31 @@
 %>
 
 <% content_for :main_grid do %>
-  <h2>
-    <%= page_title %>
-    <small><%= list_actions %></small>
-  </h2>
 
-  <%= display_flash_message %>
-  <%= render 'show' %>
+<%= display_flash_message %>
+<%= render 'show' %>
 
-  <dl>
-    <% build_display(@item, fields).each do |attribute, type| %>
-      <dt><%= attribute %></dt>
-      <dd><%= type %></dd>
-    <% end %>
-  </dl>
+<div class="boxed">
+  <div class="page-heading padded clearfix">
+    <h2>
+      <%= page_title %>
+      <small><%= list_actions %></small>
+    </h2>
+  </div>
 
+  <div class="padded">
+    <dl>
+      <% build_display(@item, fields).each do |attribute, type| %>
+        <dt><%= attribute %></dt>
+        <dd><%= type %></dd>
+      <% end %>
+    </dl>
+  </div>
+</div>
+
+<div class="boxed">
   <%= typus_relationships %>
+</div>
 <% end %>
 
 <div class="grid_2">

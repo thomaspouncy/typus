@@ -14,8 +14,11 @@
   end
 %>
 
-<h2><%= page_title %></h2>
+<div class="page-heading padded clearfix">
+  <h2><%= page_title %></h2>
+</div>
 
+<div class="padded">
 <% if applications.any? %>
   <% applications.each do |app| %>
 
@@ -45,3 +48,4 @@
     No applications detected.
   </div>
 <% end %>
+</div>
