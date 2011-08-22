@@ -1,24 +1,46 @@
 <!-- Applications list with models. -->
 
-<h2><%= Typus::I18n.t("Applications") %></h2>
+<%
+  page_title = Typus::I18n.t("Applications")
+%>
 
-<% if admin_user.applications.any? %>
-  <% admin_user.applications.each do |app| %>
+<%
+  applications = admin_user.applications
+
+  # Detect if we are inside an application.
+  if (application = params[:application])
+    applications.each do |app|
+      if app.parameterize == application
+        applications = [app]
+      end
+    end
+    page_title = applications.first
+  end
+%>
+
+<h2><%= page_title %></h2>
+
+<% if applications.any? %>
+  <% applications.each do |app| %>
 
     <table>
 
+      <% table_header = application ? "Models" : app %>
+
       <thead>
         <tr>
-          <th><%= Typus::I18n.t(app) %></th>
+          <th><%= Typus::I18n.t(table_header) %></th>
         </tr>
       </thead>
 
       <% admin_user.application(app).map { |i| i.constantize }.each do |klass| %>
-        <tr class="<%= cycle("even", "odd") %>">
-          <td>
-            <%= link_to klass.model_name.human.pluralize, :controller => "/admin/#{klass.to_resource}" %>
-          </td>
-        </tr>
+        <% if klass.typus_options_for(:hide_from_dashboard) == false %>
+          <tr class="<%= cycle("even", "odd") %>">
+            <td>
+              <%= link_to klass.model_name.human.pluralize, :controller => "/admin/#{klass.to_resource}" %>
+            </td>
+          </tr>
+        <% end %>
       <% end %>
 
     </table>

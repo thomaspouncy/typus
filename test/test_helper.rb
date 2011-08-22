@@ -1,13 +1,14 @@
+# Configure Rails Environment
 ENV["RAILS_ENV"] = "test"
 
-##
-# Boot rails_app and load the schema.
-##
-
-require "fixtures/rails_app/config/environment"
-require "fixtures/rails_app/db/schema"
-
+require File.expand_path("../dummy/config/environment.rb",  __FILE__)
+load_schema = lambda { load File.expand_path("../dummy/db/schema.rb",  __FILE__) }
+silence_stream(STDOUT, &load_schema)
 require "rails/test_help"
+
+require 'shoulda-context'
+
+Rails.backtrace_cleaner.remove_silencers!
 
 class ActiveSupport::TestCase
 
@@ -20,17 +21,17 @@ class ActiveSupport::TestCase
   end
 
   def admin_sign_in
-    @typus_user = Factory(:typus_user)
+    @typus_user = FactoryGirl.create(:typus_user)
     set_session
   end
 
   def editor_sign_in
-    @typus_user = Factory(:typus_user, :email => "editor@example.com", :role => "editor")
+    @typus_user = FactoryGirl.create(:typus_user, :email => "editor@example.com", :role => "editor")
     set_session
   end
 
   def designer_sign_in
-    @typus_user = Factory(:typus_user, :email => "designer@example.com", :role => "designer")
+    @typus_user = FactoryGirl.create(:typus_user, :email => "designer@example.com", :role => "designer")
     set_session
   end
 

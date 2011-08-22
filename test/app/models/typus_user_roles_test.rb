@@ -9,7 +9,7 @@ class TypusUserRolesTest < ActiveSupport::TestCase
   context "admin" do
 
     setup do
-      @typus_user = Factory(:typus_user)
+      @typus_user = FactoryGirl.create(:typus_user)
     end
 
     should "verify models access" do
@@ -35,7 +35,9 @@ class TypusUserRolesTest < ActiveSupport::TestCase
                   "Post",
                   "Project",
                   "ProjectCollaborator",
+                  "ReadOnlyEntry",
                   "Status",
+                  "Task",
                   "TypusUser",
                   "User",
                   "View",
@@ -69,11 +71,11 @@ class TypusUserRolesTest < ActiveSupport::TestCase
   context "editor" do
 
     setup do
-      @typus_user = Factory(:typus_user, :role => "editor")
+      @typus_user = FactoryGirl.create(:typus_user, :role => "editor")
     end
 
     should "verify models access" do
-      expected = %w(Comment Git Post TypusUser View)
+      expected = %w(Comment Git Post View)
       assert_equal expected, @typus_user.resources.map(&:first).sort
     end
 
@@ -88,8 +90,8 @@ class TypusUserRolesTest < ActiveSupport::TestCase
     end
 
     should "only read and update typus_users" do
-      %w(read update).each { |a| assert @typus_user.can?(a, 'TypusUser') }
-      %w(create delete).each { |a| assert @typus_user.cannot?(a, 'TypusUser') }
+      %w().each { |a| assert @typus_user.can?(a, 'TypusUser') }
+      %w().each { |a| assert @typus_user.cannot?(a, 'TypusUser') }
     end
 
   end
@@ -97,7 +99,7 @@ class TypusUserRolesTest < ActiveSupport::TestCase
   context "designer" do
 
     setup do
-      @typus_user = Factory(:typus_user, :role => "designer")
+      @typus_user = FactoryGirl.create(:typus_user, :role => "designer")
     end
 
     should "verify models access" do

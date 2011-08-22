@@ -9,27 +9,17 @@
     <small><%= list_actions %></small>
   </h2>
 
-  <% if flash[:notice] && headless_mode? %>
-    <script>
-      $(document).ready(function() { parent.location.reload(); });
-    </script>
-  <% end %>
-
   <%= display_flash_message %>
   <%= render 'edit' %>
 
-  <%
-    options = params.dup.cleanup.merge!(:action => 'update')
-    button = Typus::I18n.t("Save %{resource}", :resource => @resource.model_name.human)
-  %>
-
-  <%= render :partial => 'form', :locals => { :options => options, :button => button } %>
+  <% locals = { :options => params.dup.cleanup.merge!(:action => 'update') } %>
+  <%= render 'form', locals %>
 
   <%= typus_relationships unless headless_mode? %>
 <% end %>
 
 <div class="grid_2">
-  <%= build_sidebar.present? ? build_sidebar : render("admin/templates/profile_sidebar") %>
+  <%= build_sidebar || render("admin/templates/profile_sidebar") %>
 </div>
 
 <div class="grid_8">

@@ -11,12 +11,12 @@ require "test_helper"
 class Admin::EntriesControllerTest < ActionController::TestCase
 
   setup do
-    @request.session[:typus_user_id] = Factory(:typus_user).id
+    @request.session[:typus_user_id] = FactoryGirl.create(:typus_user).id
   end
 
   test "export csv" do
     Entry.delete_all
-    entry = Factory(:entry)
+    entry = FactoryGirl.create(:entry)
 
     expected = <<-RAW
 title,published
@@ -27,6 +27,11 @@ title,published
 
     assert_response :success
     assert_equal expected, @response.body
+  end
+
+  test "export XML" do
+    get :index, :format => "xml"
+    assert_response :unprocessable_entity
   end
 
 end

@@ -25,7 +25,7 @@ class Admin::SessionControllerTest < ActionController::TestCase
   context "With users" do
 
     setup do
-      @typus_user = Factory(:typus_user)
+      @typus_user = FactoryGirl.create(:typus_user)
     end
 
     should "render new" do
@@ -63,7 +63,7 @@ class Admin::SessionControllerTest < ActionController::TestCase
     end
 
     should "not_create_session_for_a_disabled_user" do
-      typus_user = Factory(:typus_user, :email => "disabled@example.com", :status => false)
+      typus_user = FactoryGirl.create(:typus_user, :email => "disabled@example.com", :status => false)
 
       post :create, { :typus_user => { :email => typus_user.email, :password => "12345678" } }
 
@@ -76,7 +76,7 @@ class Admin::SessionControllerTest < ActionController::TestCase
       post :create, { :typus_user => { :email => @typus_user.email, :password => "12345678" } }
       assert_equal @typus_user.id, @request.session[:typus_user_id]
       assert_response :redirect
-      assert_redirected_to admin_dashboard_path
+      assert_redirected_to admin_dashboard_index_path
     end
 
     should "destroy" do

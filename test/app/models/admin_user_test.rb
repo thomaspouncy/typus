@@ -12,7 +12,7 @@ require "test_helper"
 class AdminUserTest < ActiveSupport::TestCase
 
   test "token changes everytime we save the user" do
-    admin_user = Factory(:admin_user)
+    admin_user = FactoryGirl.create(:admin_user)
     first_token = admin_user.token
     admin_user.save
     second_token = admin_user.token
@@ -24,7 +24,7 @@ class AdminUserTest < ActiveSupport::TestCase
   end
 
   test "mapping locales" do
-    admin_user = Factory.build(:admin_user, :locale => "en")
+    admin_user = FactoryGirl.build(:admin_user, :locale => "en")
     assert_equal "English", admin_user.mapping(:locale)
   end
 
