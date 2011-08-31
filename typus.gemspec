@@ -15,8 +15,8 @@ Gem::Specification.new do |s|
   s.version = Typus::VERSION
   s.platform = Gem::Platform::RUBY
   s.authors = ["Francesc Esplugas"]
-  s.email = ["core@typuscms.com"]
-  s.homepage = "http://core.typuscms.com/"
+  s.email = ["core@typuscmf.com"]
+  s.homepage = "http://core.typuscmf.com/"
   s.summary = "Effortless backend interface for Ruby on Rails applications. (Admin scaffold generator)"
   s.description = "Ruby on Rails Admin Panel (Engine) to allow trusted users edit structured content."
 
@@ -28,7 +28,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "jquery-rails"
   s.add_dependency "kaminari"
-  s.add_dependency "rails", "~> 3.1.0.rc6"
+  s.add_dependency "rails", "~> 3.1.0"
 
   # Development dependencies are defined in the `Gemfile`.
 end

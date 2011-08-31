@@ -16,12 +16,16 @@ class Admin::ResourcesController < Admin::BaseController
   def index
     get_objects
 
+    custom_actions_for(:index).each do |action|
+      prepend_resources_action(action.titleize, {:action => action, :id => nil}, {})
+    end
+
     respond_to do |format|
       format.html do
         if headless_mode_with_custom_action_is_enabled?
           set_headless_resource_actions
         else
-          add_resource_action(default_action.titleize, {:action => default_action}, {})
+          set_default_action
           add_resource_action("Trash", {:action => "destroy"}, {:confirm => "#{Typus::I18n.t("Trash")}?", :method => 'delete'})
         end
         generate_html
@@ -59,18 +63,24 @@ class Admin::ResourcesController < Admin::BaseController
     end
   end
 
-  def edit; end
+  def edit
+    custom_actions_for(:edit).each do |action|
+      prepend_resources_action(action.titleize, {:action => action, :id => @item}, {})
+    end
+  end
 
   def show
     check_resource_ownership if @resource.typus_options_for(:only_user_items)
 
-=begin
+    if admin_user.can?('edit', @resource)
+      prepend_resources_action("Edit", {:action => 'edit', :id => @item}, {})
+    end
+
     respond_to do |format|
       format.html # show.html.erb
-      format.xml { render :xml => @item }
+      format.xml { can_export?(:xml) ? render(:xml => @item) : not_allowed }
       format.json { render :json => @item }
     end
-=end
   end
 
   def update
@@ -204,8 +214,15 @@ class Admin::ResourcesController < Admin::BaseController
     redirect_to path, :notice => notice
   end
 
-  def default_action
-    @resource.typus_options_for(:default_action_on_item)
+  def set_default_action
+    default_action = @resource.typus_options_for(:default_action_on_item)
+    action = admin_user.can?('edit', @resource.model_name) ? default_action : "show"
+    add_resource_action(action.titleize, {:action => action}, {})
+  end
+
+  def custom_actions_for(action)
+    return [] if headless_mode?
+    @resource.typus_actions_on(action).reject { |a| admin_user.cannot?(a, @resource.model_name) }
   end
 
 end

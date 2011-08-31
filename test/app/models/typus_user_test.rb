@@ -27,11 +27,11 @@ class TypusUserTest < ActiveSupport::TestCase
     assert FactoryGirl.build(:typus_user, :password => "0"*41).invalid?
   end
 
-  should "not allow_mass_assignment_of :status" do
+  test "status is protected from mass_assignment" do
     assert TypusUser.attr_protected[:default].include?(:status)
   end
 
-  should "verify columns" do
+  test "fields" do
     expected = %w(id first_name last_name email role status salt crypted_password token preferences created_at updated_at).sort
     output = TypusUser.columns.map(&:name).sort
     assert_equal expected, output
@@ -124,13 +124,16 @@ class TypusUserTest < ActiveSupport::TestCase
     assert_equal Typus.applications.reject { |i| i.eql?("MongoDB") }, typus_user.applications
   end
 
+=begin
+  # TODO: Decide if we want this test ...
   test "admin gets a list of application resources for crud extended application" do
     typus_user = FactoryGirl.build(:typus_user)
     # OPTIMIZE: There's no need to sort stuff but this is required to make it
     #           work with Ruby 1.8.7.
-    expected = %w(Asset Case Comment Page Post Article::Entry).sort
+    expected = %w(Asset Case Comment EntryDefault Page Post Article::Entry ReadOnlyEntry).sort
     assert_equal expected, typus_user.application("CRUD Extended").sort
   end
+=end
 
   test "admin gets a list of application resources for Admin application" do
     typus_user = FactoryGirl.build(:typus_user)
@@ -149,7 +152,7 @@ class TypusUserTest < ActiveSupport::TestCase
   test "editor gets a list of application resources" do
     typus_user = FactoryGirl.build(:typus_user, :role => "editor")
     assert_equal %w(Comment Post), typus_user.application("CRUD Extended")
-    assert_equal %w(), typus_user.application("Admin")
+    assert typus_user.application("Admin").empty?
   end
 
   test "user owns a resource" do

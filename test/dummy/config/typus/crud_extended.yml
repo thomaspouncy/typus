@@ -75,3 +75,46 @@ Article::Entry:
   search: title
   filters: published
   application: CRUD Extended
+
+EntryDefault:
+  fields:
+    options:
+      booleans:
+        published: ["Yes", "No"]
+  filters: published
+  application: CRUD Extended
+
+ReadOnlyEntry:
+  fields:
+    default: title, content, published
+  application: CRUD Extended
+
+Category:
+  fields:
+    default: name, position
+    form: name, permalink, position
+  order_by: position
+  search: name
+  application: CRUD Extended
+
+EntryBulk:
+  fields:
+    default: title, published
+    form: title, content, published
+    options:
+      booleans:
+        published: ["Yes", "No"]
+  search: title
+  filters: published
+  application: CRUD Extended
+
+EntryTrash:
+  fields:
+    default: title, published
+    form: title, content, published
+    options:
+      booleans:
+        published: ["Yes", "No"]
+  search: title
+  filters: published
+  application: CRUD Extended

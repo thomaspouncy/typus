@@ -8,8 +8,8 @@ gemspec
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails', "~> 3.1.0.rc"
-  gem 'coffee-rails', "~> 3.1.0.rc"
+  gem 'sass-rails', "  ~> 3.1.0"
+  gem 'coffee-rails', "~> 3.1.0"
   gem 'uglifier'
 end
 
@@ -42,7 +42,7 @@ gem "jquery-rails"
 gem "ckeditor-rails", "0.0.2"
 
 # Alternative authentication
-gem "devise", "~> 1.4.2"
+gem "devise", "~> 1.4.3"
 
 # Asset Management with Dragonfly
 gem "dragonfly", "~> 0.9"
@@ -58,4 +58,12 @@ gem "bson_ext", "~> 1.3"
 group :test do
   gem "shoulda-context", "~> 1.0.0.beta1"
   gem "mocha" # Make sure mocha is loaded at the end ...
+end
+
+# Remember to install the Chrome or Safari extension, otherwise it doesn't
+# make sense to have this here.
+group :development do
+  gem "guard-livereload"
+  gem "rb-fsevent"
+  gem "growl_notify"
 end

@@ -46,7 +46,7 @@ module Typus
 
   mattr_accessor :admin_sub_title
   @@admin_sub_title = <<-CODE
-<a href="http://core.typuscms.com/">core.typuscms.com</a>
+<a href="http://core.typuscmf.com/">core.typuscmf.com</a>
   CODE
 
   ##
@@ -215,9 +215,25 @@ module Typus
       user_class_name.constantize
     end
 
+    def root
+      Rails.root.join(config_folder)
+    end
+
+    def model_configuration_files
+      app = Typus.root.join("*.yml")
+      plugins = Rails.root.join("vendor", "plugins", "*", "config", "typus", "*.yml")
+      Dir[app, plugins].reject { |f| f.match(/_roles.yml/) }.sort
+    end
+
+    def role_configuration_files
+      app = Typus.root.join("*_roles.yml")
+      plugins = Rails.root.join("vendor", "plugins", "*", "config", "typus", "*_roles.yml")
+      Dir[app, plugins].sort
+    end
+
     def reload!
       Typus::Configuration.roles!
-      Typus::Configuration.config!
+      Typus::Configuration.models!
     end
 
   end

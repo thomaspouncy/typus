@@ -27,7 +27,7 @@ You can try a demo [here][typus_demo].
 
 Add **Typus** to your `Gemfile`
 
-    gem 'typus', '~> 3.1.0.rc'
+    gem 'typus'
 
     # Bundle edge Typus instead:
     # gem 'typus', :git => 'git://github.com/typus/typus.git'
@@ -62,7 +62,7 @@ To test clone the git repo and run the following commands:
 Typus is released under the MIT license.
 
 [typus]: http://github.com/typus/typus
-[typus_demo]: http://demo.typuscms.com/
+[typus_demo]: http://demo.typuscmf.com/
 [typus_demo_code]: https://github.com/typus/demo
 [typus_locales]: https://github.com/typus/typus/tree/master/config/locales
 [typus_gem]: http://rubygems.org/gems/typus
