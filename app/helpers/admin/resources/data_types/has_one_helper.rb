@@ -11,7 +11,7 @@ module Admin::Resources::DataTypes::HasOneHelper
     locals = { :association_name => @association_name, :table => build_relationship_table, :add_new => nil }
 
     if @items.empty?
-      options = { :resource_id => nil, @reflection.foreign_key => @item.id }
+      options = { "resource[#{@reflection.foreign_key}]" => @item.id }
       locals[:add_new] = build_add_new_for_has_one(@model_to_relate, field, options)
     end
 
@@ -22,7 +22,7 @@ module Admin::Resources::DataTypes::HasOneHelper
     if admin_user.can?("create", klass)
       default_options = { :controller => "/admin/#{klass.to_resource}",
                           :action => "new",
-                          :layout => "admin/headless" }
+                          :_popup => true }
 
       link_to Typus::I18n.t("Add New"), default_options.merge(options), { :class => "iframe" }
     end

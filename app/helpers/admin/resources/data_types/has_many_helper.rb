@@ -14,14 +14,12 @@ module Admin::Resources::DataTypes::HasManyHelper
   def typus_form_has_many(field)
     setup_relationship(field)
 
-    options = { @reflection.foreign_key => @item.id }
+    options = { "resource[#{@reflection.foreign_key}]" => @item.id }
 
     if @reflection.options && (as = @reflection.options[:as])
       klass = @resource.is_sti? ? @resource.superclass : @resource
       options.merge!("#{as}_type" => klass)
     end
-
-    count_items_to_relate = @model_to_relate.order(@model_to_relate.typus_order_by).count - @item.send(field).count
 
     build_pagination
     set_has_many_resource_actions
@@ -37,14 +35,14 @@ module Admin::Resources::DataTypes::HasManyHelper
     if admin_user.can?("create", klass)
       default_options = { :controller => "/admin/#{klass.to_resource}",
                           :action => "new",
-                          :layout => "admin/headless" }
+                          :_popup => true }
 
-      link_to Typus::I18n.t("Add New"), default_options.merge(options), { :class => "iframe_with_reload" }
+      link_to Typus::I18n.t("Add New"), default_options.merge(options), { :class => "iframe" }
     end
   end
 
   def set_has_many_resource_actions
-    @resource_actions = [["Edit", { :action => "edit", :layout => 'admin/headless' }, { :class => 'iframe' }],
+    @resource_actions = [["Edit", { :action => "edit", :_popup => true }, { :class => 'iframe' }],
                          ["Trash", { :action => "destroy" }, { :confirm => "Trash?" } ]]
   end
 

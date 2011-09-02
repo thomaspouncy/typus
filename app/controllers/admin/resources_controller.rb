@@ -22,12 +22,8 @@ class Admin::ResourcesController < Admin::BaseController
 
     respond_to do |format|
       format.html do
-        if headless_mode_with_custom_action_is_enabled?
-          set_headless_resource_actions
-        else
-          set_default_action
-          add_resource_action("Trash", {:action => "destroy"}, {:confirm => "#{Typus::I18n.t("Trash")}?", :method => 'delete'})
-        end
+        set_default_action
+        add_resource_action("Trash", {:action => "destroy"}, {:confirm => "#{Typus::I18n.t("Trash")}?", :method => 'delete'})
         generate_html
       end
 
@@ -36,9 +32,7 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def new
-    item_params = params.dup
-    item_params.delete_if { |k, v| !@resource.columns.map(&:name).include?(k) }
-    @item = @resource.new(item_params)
+    @item = @resource.new(params[:resource])
 
     respond_to do |format|
       format.html # new.html.erb
@@ -47,8 +41,13 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def create
+    # Note that we still can still assign the item to another model. To change
+    # this behavior we need only to change how we merge the params.
+    item_params = params[:resource] || {}
+    item_params.merge!(params[@object_name])
+
     @item = @resource.new
-    @item.assign_attributes(params[@object_name], :as => :admin)
+    @item.assign_attributes(item_params, :as => current_role)
 
     set_attributes_on_create
 
@@ -84,11 +83,10 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def update
-    attributes = params[:attribute] ? { params[:attribute] => nil } : params[@object_name]
+    attributes = params[:_nullify] ? { params[:_nullify] => nil } : params[@object_name]
 
     respond_to do |format|
-      role = admin_user.is_root? ? :admin : :default
-      if @item.update_attributes(attributes, :as => role)
+      if @item.update_attributes(attributes, :as => current_role)
         set_attributes_on_update
         format.html { redirect_on_success }
         format.json { render :json => @item }
@@ -200,18 +198,18 @@ class Admin::ResourcesController < Admin::BaseController
   def redirect_on_success
     path = params.dup.cleanup
 
-    if params[:_save]
-      path.delete_if { |k, v| %w(action id).include?(k) } # Redirects to { :action => 'index' }
+    options = if params[:_save]
+      { :action => nil, :id => nil }
     elsif params[:_addanother]
-      path.merge!(:action => 'new', :id => nil) # Redirects to { :action => 'new' }
+      { :action => 'new', :id => nil }
     elsif params[:_continue]
-      path.merge!(:action => 'edit', :id => @item.id) # Redirects to { :action => 'edit' => :id => @item.id }
+      { :action => 'edit', :id => @item.id }
     end
 
     message = params[:action].eql?('create') ? "%{model} successfully created." : "%{model} successfully updated."
     notice = Typus::I18n.t(message, :model => @resource.model_name.human)
 
-    redirect_to path, :notice => notice
+    redirect_to path.merge!(options).compact, :notice => notice
   end
 
   def set_default_action

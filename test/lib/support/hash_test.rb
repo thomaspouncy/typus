@@ -9,7 +9,7 @@ class HashTest < ActiveSupport::TestCase
   end
 
   test "cleanup" do
-    whitelist = %w(controller action id input layout resource resource_id resource_action selected back_to )
+    whitelist = %w(controller action id _input _popup resource attribute)
     whitelist.each do |w|
       expected = { w => w }
       assert_equal expected, expected.dup.cleanup
@@ -17,7 +17,7 @@ class HashTest < ActiveSupport::TestCase
   end
 
   test "cleanup rejects unwanted stuff" do
-    hash = {"attribute" => "dragonfly"}
+    hash = {"_nullify" => "dragonfly"}
     expected = {}
     assert_equal expected, hash.cleanup
   end

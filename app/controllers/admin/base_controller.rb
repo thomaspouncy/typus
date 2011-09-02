@@ -7,6 +7,7 @@ class Admin::BaseController < ActionController::Base
   before_filter :set_locale
 
   helper_method :admin_user
+  helper_method :current_role
 
   def user_guide; end
 
@@ -18,10 +19,10 @@ class Admin::BaseController < ActionController::Base
 
   def set_locale
     I18n.locale = if admin_user && admin_user.respond_to?(:locale)
-                    admin_user.locale
-                  else
-                    Typus::I18n.default_locale
-                  end
+      admin_user.locale
+    else
+      Typus::I18n.default_locale
+    end
   end
 
   def zero_users

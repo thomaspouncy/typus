@@ -11,7 +11,7 @@ $(document).ready(function() {
         'scrolling': false,
     });
 
-    $(".iframe_with_reload").fancybox({
+    $(".iframe_with_form_reload").fancybox({
         'width': 720,
         'height': '90%',
         'autoScale': false,
@@ -20,7 +20,14 @@ $(document).ready(function() {
         'type': 'iframe',
         'centerOnScroll': true,
         'scrolling': false,
-        onClosed: function() { parent.location.reload(true); },
+        onClosed: function() {
+            // console.log(arguments);
+            var attribute = Typus.resource_attribute;
+            var text = Typus.resource_to_label;
+            var value = Typus.resource_id;
+            $(attribute).append(new Option(text, value, true, true));
+            $(".chzn-select").trigger("liszt:updated");
+        },
     });
 
     $(".iframe").fancybox({
@@ -32,6 +39,10 @@ $(document).ready(function() {
         'type': 'iframe',
         'centerOnScroll': true,
         'scrolling': false,
+        onClosed: function() {
+            if (Typus.parent_location_reload)
+                parent.location.reload(true);
+        },
     });
 
     // This method is used by Typus::Controller::Bulk
@@ -44,6 +55,8 @@ $(document).ready(function() {
     $(".chzn-select").chosen();
 
 });
+
+Typus = {}
 
 function setConfirmUnload(on) {
     window.onbeforeunload = (on) ? unloadMessage : null;
