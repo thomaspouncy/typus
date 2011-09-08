@@ -48,9 +48,14 @@ To test clone the git repo and run the following commands:
     $ bundle install --path vendor/bundle
     $ bundle exec rake
 
+**Note:** In `OSX Lion` it's possible you need to create a `postgres`
+user to be able to run tests.
+
+    CREATE USER postgres SUPERUSER;
+
 ## Links
 
-- [Documentation](https://github.com/typus/typus/wiki)
+- [Documentation](https://docs.typuscmf.com/)
 - [Issues](https://github.com/typus/typus/issues)
 - [Source Code][typus] and [RubyGems][typus_gem]
 - [Mailing List](http://groups.google.com/group/typus)
@@ -63,7 +68,6 @@ Typus is released under the MIT license.
 
 [typus]: http://github.com/typus/typus
 [typus_demo]: http://demo.typuscmf.com/
-[typus_demo_code]: https://github.com/typus/demo
 [typus_locales]: https://github.com/typus/typus/tree/master/config/locales
 [typus_gem]: http://rubygems.org/gems/typus
 [paperclip]: http://rubygems.org/gems/paperclip
